@@ -1,36 +1,43 @@
 import logging
 
-import algokit_utils
-from algosdk.v2client.algod import AlgodClient
-from algosdk.v2client.indexer import IndexerClient
+from algokit_utils import (
+    AlgoAmount,
+    AlgorandClient,
+    OnSchemaBreak,
+    OnUpdate,
+    OperationPerformed,
+    PaymentParams,
+)
 
 logger = logging.getLogger(__name__)
 
 
-# define deployment behaviour based on supplied app spec
-def deploy(
-    algod_client: AlgodClient,
-    indexer_client: IndexerClient,
-    app_spec: algokit_utils.ApplicationSpecification,
-    deployer: algokit_utils.Account,
-) -> None:
+# Define deployment behaviour based on supplied app spec
+def deploy() -> None:
     from smart_contracts.artifacts.de_chametz.de_chametz_client import (
-        DeChametzClient,
+        DeChametzFactory,
     )
 
-    app_client = DeChametzClient(
-        algod_client,
-        creator=deployer,
-        indexer_client=indexer_client,
+    algorand = AlgorandClient.from_environment()
+    deployer_ = algorand.account.from_environment("DEPLOYER")
+
+    factory = algorand.client.get_typed_app_factory(
+        DeChametzFactory, default_sender=deployer_.address
     )
 
-    app_client.deploy(
-        on_schema_break=algokit_utils.OnSchemaBreak.AppendApp,
-        on_update=algokit_utils.OnUpdate.AppendApp,
+    app_client, result = factory.deploy(
+        on_update=OnUpdate.AppendApp,
+        on_schema_break=OnSchemaBreak.AppendApp,
     )
-    name = "world"
-    response = app_client.hello(name=name)
-    logger.info(
-        f"Called hello on {app_spec.contract.name} ({app_client.app_id}) "
-        f"with name={name}, received: {response.return_value}"
-    )
+
+    if result.operation_performed in [
+        OperationPerformed.Create,
+        OperationPerformed.Replace,
+    ]:
+        algorand.send.payment(
+            PaymentParams(
+                amount=AlgoAmount(micro_algo=200_000),
+                sender=deployer_.address,
+                receiver=app_client.app_address,
+            )
+        )
