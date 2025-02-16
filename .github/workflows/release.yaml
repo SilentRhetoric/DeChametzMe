@@ -5,10 +5,10 @@ on:
     branches:
       - main
     paths-ignore:
-      - 'docs/**'
-      - '**.md'
-      - '.vscode/**'
-      - '.idea/**'
+      - "docs/**"
+      - "**.md"
+      - ".vscode/**"
+      - ".idea/**"
 
 permissions:
   contents: read
@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   deChametzMe-contracts-validate:
-    name: Run deChametzMe-contracts release
+    name: Run deChametzMe-contracts validate
     secrets: inherit
     uses: ./.github/workflows/deChametzMe-contracts-ci.yaml
 
@@ -27,7 +27,7 @@ jobs:
     needs: deChametzMe-contracts-validate
 
   deChametzMe-frontend-validate:
-    name: Run deChametzMe-frontend release
+    name: Run deChametzMe-frontend validate
     secrets: inherit
     uses: ./.github/workflows/deChametzMe-frontend-ci.yaml
 
