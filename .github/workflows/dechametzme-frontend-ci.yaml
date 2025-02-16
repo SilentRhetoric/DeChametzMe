@@ -1,13 +1,11 @@
 name: Validate deChametzMe-frontend
 
 on:
-  
   workflow_call:
-  
 
 jobs:
   validate:
-    runs-on: 'ubuntu-latest'
+    runs-on: "ubuntu-latest"
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -34,14 +32,11 @@ jobs:
       - name: Install dependencies
         run: algokit project bootstrap all --project-name 'deChametzMe-frontend'
 
-      
       - name: Run linters
         run: algokit project run lint --project-name 'deChametzMe-frontend'
-      
-      
+
       - name: Run unit tests
         run: algokit project run test --project-name 'deChametzMe-frontend'
-      
 
       - name: Build
         run: algokit project run build --project-name 'deChametzMe-frontend'
