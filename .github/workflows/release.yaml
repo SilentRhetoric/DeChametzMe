@@ -23,7 +23,7 @@ jobs:
   deChametzMe-contracts-release:
     name: Run deChametzMe-contracts release
     secrets: inherit
-    uses: ./.github/workflows/deChametzMe-contracts-cd.yaml
+    uses: ./deChametzMe-contracts-cd.yaml
     needs: deChametzMe-contracts-validate
 
   deChametzMe-frontend-validate:
