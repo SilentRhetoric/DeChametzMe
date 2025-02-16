@@ -18,21 +18,21 @@ jobs:
   deChametzMe-contracts-validate:
     name: Run deChametzMe-contracts validate
     secrets: inherit
-    uses: ./.github/workflows/deChametzMe-contracts-ci.yaml@main
+    uses: ./.github/workflows/deChametzMe-contracts-ci.yaml
 
   deChametzMe-contracts-release:
     name: Run deChametzMe-contracts release
     secrets: inherit
-    uses: ./.github/workflows/deChametzMe-contracts-cd.yaml@main
+    uses: ./.github/workflows/deChametzMe-contracts-cd.yaml
     needs: deChametzMe-contracts-validate
 
   deChametzMe-frontend-validate:
     name: Run deChametzMe-frontend validate
     secrets: inherit
-    uses: ./.github/workflows/deChametzMe-frontend-ci.yaml@main
+    uses: ./.github/workflows/deChametzMe-frontend-ci.yaml
 
   deChametzMe-frontend-release:
     name: Run deChametzMe-frontend release
     secrets: inherit
-    uses: ./.github/workflows/deChametzMe-frontend-cd.yaml@main
+    uses: ./.github/workflows/deChametzMe-frontend-cd.yaml
     needs: deChametzMe-frontend-validate
