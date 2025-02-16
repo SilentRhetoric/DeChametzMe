@@ -30,7 +30,7 @@ def pytest_sessionstart(session: pytest.Session) -> None:
     args = ["algokit", "localnet", "reset"]
     result = subprocess.run(args, capture_output=True, text=True, check=True)
     print(f"Before session start - result: {result}")
-    time.sleep(10)
+    time.sleep(30)
 
 
 @pytest.fixture(scope="session")
