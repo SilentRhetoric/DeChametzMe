@@ -8,7 +8,7 @@ jobs:
     runs-on: "ubuntu-latest"
     defaults:
       run:
-        working-directory: ./DeChametzMe-frontend/
+        working-directory: ./projects/DeChametzMe-frontend/
 
     steps:
       - name: List repository files
