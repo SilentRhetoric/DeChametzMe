@@ -3,6 +3,8 @@
 interface ImportMetaEnv {
   readonly VITE_ENVIRONMENT: string
 
+  readonly VITE_APP_ID: number
+
   readonly VITE_ALGOD_TOKEN: string
   readonly VITE_ALGOD_SERVER: string
   readonly VITE_ALGOD_PORT: string

@@ -1,5 +1,13 @@
 import { AlgoViteClientConfig, AlgoViteKMDConfig } from '../../interfaces/network'
 
+export function getAppIDFromViteEnvironment(): number {
+  if (!import.meta.env.VITE_APP_ID) {
+    throw new Error('Attempt to get default app ID configuration without specifying VITE_APP_ID in the environment variables')
+  }
+
+  return import.meta.env.VITE_APP_ID
+}
+
 export function getAlgodConfigFromViteEnvironment(): AlgoViteClientConfig {
   if (!import.meta.env.VITE_ALGOD_SERVER) {
     throw new Error('Attempt to get default algod configuration without specifying VITE_ALGOD_SERVER in the environment variables')

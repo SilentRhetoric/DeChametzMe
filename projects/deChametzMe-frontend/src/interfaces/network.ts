@@ -1,6 +1,11 @@
 import { AlgoClientConfig } from '@algorandfoundation/algokit-utils/types/network-client'
 import type { TokenHeader } from 'algosdk/dist/types/client/urlTokenBaseHTTPClient'
 
+export interface AlgoViteAppIDConfig {
+  /** The deployed application ID of the smart contract */
+  appId: string
+}
+
 export interface AlgoViteClientConfig extends AlgoClientConfig {
   /** Base URL of the server e.g. http://localhost, https://testnet-api.algonode.cloud/, etc. */
   server: string

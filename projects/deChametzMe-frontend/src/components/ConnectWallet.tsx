@@ -69,7 +69,7 @@ const ConnectWallet = ({ openModal, closeModal }: ConnectWalletInterface) => {
                     // Required for logout/cleanup of inactive providers
                     // For instance, when you login to localnet wallet and switch network
                     // to testnet/mainnet or vice verse.
-                    localStorage.removeItem('@txnlab/use-wallet:v3')
+                    localStorage.removeItem('@txnlab/use-wallet:v4')
                     window.location.reload()
                   }
                 }

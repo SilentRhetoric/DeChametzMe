@@ -1,10 +1,9 @@
-import { useWallet } from '@txnlab/use-wallet'
+import { AlgorandClient } from '@algorandfoundation/algokit-utils'
+import { useWallet } from '@txnlab/use-wallet-react'
 import { useSnackbar } from 'notistack'
 import { useState } from 'react'
-import { DeChametzFactory } from '../contracts/DeChametz'
-import { OnSchemaBreak, OnUpdate } from '@algorandfoundation/algokit-utils/types/app'
+import { DeChametzClient } from '../contracts/DeChametz'
 import { getAlgodConfigFromViteEnvironment, getIndexerConfigFromViteEnvironment } from '../utils/network/getAlgoClientConfigs'
-import { AlgorandClient } from '@algorandfoundation/algokit-utils'
 
 interface AppCallsInterface {
   openModal: boolean
@@ -15,7 +14,7 @@ const AppCalls = ({ openModal, setModalState }: AppCallsInterface) => {
   const [loading, setLoading] = useState<boolean>(false)
   const [contractInput, setContractInput] = useState<string>('')
   const { enqueueSnackbar } = useSnackbar()
-  const { signer, activeAddress } = useWallet()
+  const { transactionSigner, activeAddress } = useWallet()
 
   const algodConfig = getAlgodConfigFromViteEnvironment()
   const indexerConfig = getIndexerConfigFromViteEnvironment()
@@ -23,42 +22,47 @@ const AppCalls = ({ openModal, setModalState }: AppCallsInterface) => {
     algodConfig,
     indexerConfig,
   })
-  algorand.setDefaultSigner(signer)
+  algorand.setDefaultSigner(transactionSigner)
 
   const sendAppCall = async () => {
     setLoading(true)
 
-    // Please note, in typical production scenarios,
-    // you wouldn't want to use deploy directly from your frontend.
-    // Instead, you would deploy your contract on your backend and reference it by id.
-    // Given the simplicity of the starter contract, we are deploying it on the frontend
-    // for demonstration purposes.
-    const factory = new DeChametzFactory({
-      defaultSender: activeAddress,
-      algorand,
-    })
-    const deployResult = await factory
-      .deploy({
-        onSchemaBreak: OnSchemaBreak.AppendApp,
-        onUpdate: OnUpdate.AppendApp,
-      })
+    // For TestNet, the app is already deployed so a client can be created
+    const appClient = new DeChametzClient({ algorand, appId: 733981798n })
+
+    // // Please note, in typical production scenarios,
+    // // you wouldn't want to use deploy directly from your frontend.
+    // // Instead, you would deploy your contract on your backend and reference it by id.
+    // // Given the simplicity of the starter contract, we are deploying it on the frontend
+    // // for demonstration purposes.
+    // const factory = new DeChametzFactory({
+    //   defaultSender: activeAddress,
+    //   algorand,
+    // })
+    // const deployResult = await factory
+    //   .deploy({
+    //     onSchemaBreak: OnSchemaBreak.AppendApp,
+    //     onUpdate: OnUpdate.AppendApp,
+    //   })
+    //   .catch((e: Error) => {
+    //     enqueueSnackbar(`Error deploying the contract: ${e.message}`, { variant: 'error' })
+    //     setLoading(false)
+    //     return undefined
+    //   })
+
+    // if (!deployResult) {
+    //   return
+    // }
+
+    // const { appClient } = deployResult
+
+    const response = await appClient.send.optIn
+      .sellChametz({ args: { chametz: contractInput }, sender: activeAddress! })
       .catch((e: Error) => {
-        enqueueSnackbar(`Error deploying the contract: ${e.message}`, { variant: 'error' })
+        enqueueSnackbar(`Error calling the contract: ${e.message}`, { variant: 'error' })
         setLoading(false)
         return undefined
       })
-
-    if (!deployResult) {
-      return
-    }
-
-    const { appClient } = deployResult
-
-    const response = await appClient.send.hello({ args: { name: contractInput } }).catch((e: Error) => {
-      enqueueSnackbar(`Error calling the contract: ${e.message}`, { variant: 'error' })
-      setLoading(false)
-      return undefined
-    })
 
     if (!response) {
       return
@@ -75,7 +79,7 @@ const AppCalls = ({ openModal, setModalState }: AppCallsInterface) => {
         <br />
         <input
           type="text"
-          placeholder="Provide input to hello function"
+          placeholder="Provide input to method call"
           className="input input-bordered w-full"
           value={contractInput}
           onChange={(e) => {
