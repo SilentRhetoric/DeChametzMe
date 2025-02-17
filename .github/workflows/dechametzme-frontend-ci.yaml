@@ -6,6 +6,9 @@ on:
 jobs:
   validate:
     runs-on: "ubuntu-latest"
+    defaults:
+      run:
+        working-directory: projects/DeChametzMe-frontend/
 
     steps:
       - name: Check out repository
