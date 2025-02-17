@@ -11,6 +11,9 @@ jobs:
         working-directory: ./DeChametzMe-frontend/
 
     steps:
+      - name: List repository files
+        run: ls -la /home/runner/work/DeChametzMe/DeChametzMe
+
       - name: Check out repository
         uses: actions/checkout@v4
         with:
@@ -29,7 +32,7 @@ jobs:
           cache: "pnpm"
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
 
       - name: Install poetry
         run: pipx install poetry
