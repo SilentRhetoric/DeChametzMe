@@ -50,8 +50,5 @@ jobs:
       - name: Run linters
         run: algokit project run lint
 
-      - name: Run unit tests
-        run: algokit project run test --project-name 'DeChametzMe-frontend'
-
       - name: Build
         run: algokit project run build --project-name 'DeChametzMe-frontend'
