@@ -22,7 +22,7 @@ const Home: React.FC<HomeProps> = () => {
 
   return (
     <div className="hero min-h-screen bg-gray-900">
-      <div className="hero-content text-center rounded-lg p-6 max-w-md bg-gray-900 text-white border-2 border-black mx-auto">
+      <div className="hero-content mx-auto max-w-md rounded-lg border-2 border-black bg-gray-900 p-6 text-center text-white">
         <div className="max-w-md">
           <h1 className="text-4xl">
             Welcome to <div className="font-bold">DeChametz Me</div>

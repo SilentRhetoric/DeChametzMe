@@ -4,5 +4,5 @@
 
 .hero {
   background-size: 320px 153.6px;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 320 153.6" width="320" height="153.6" style="opacity: 0.5; filter: grayscale(0);"><text x="0em" y="1em" font-size="64" transform="rotate(0 40 38.4)">🍞</text><text x="1.25em" y="2em" font-size="64" transform="rotate(0 120 102.4)">🔂</text><text x="2.5em" y="1em" font-size="64" transform="rotate(0 200 38.4)">💸</text><text x="3.75em" y="2em" font-size="64" transform="rotate(0 280 102.4)">🤝</text></svg>');
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 320 153.6" width="320" height="153.6" style="opacity: 1.0; filter: grayscale(0);"><text x="0em" y="1em" font-size="64" transform="rotate(0 40 38.4)">🍞</text><text x="1.25em" y="2em" font-size="64" transform="rotate(0 120 102.4)">🔂</text><text x="2.5em" y="1em" font-size="64" transform="rotate(0 200 38.4)">💸</text><text x="3.75em" y="2em" font-size="64" transform="rotate(0 280 102.4)">🤝</text></svg>');
 }

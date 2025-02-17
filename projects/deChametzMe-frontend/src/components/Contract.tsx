@@ -43,7 +43,7 @@ const ContractInfo = () => {
 
   return (
     <div>
-      <a className="text-xl " target="_blank" href={`https://lora.algokit.io/${networkName}/application/${appId}/`}>
+      <a className="text-xl" target="_blank" href={`https://lora.algokit.io/${networkName}/application/${appId}/`}>
         View Application on Lora
       </a>
       <p className="">Smart Contract Religion: {isJewish === 'no' ? 'Non-Jewish' : null}</p>

@@ -75,18 +75,18 @@ const AppCalls = ({ openModal, setModalState }: AppCallsInterface) => {
   return (
     <dialog id="appcalls_modal" className={`modal ${openModal ? 'modal-open' : ''} bg-slate-200`}>
       <form method="dialog" className="modal-box">
-        <h3 className="font-bold text-lg">Say hello to your Algorand smart contract</h3>
+        <h3 className="text-lg font-bold">Say hello to your Algorand smart contract</h3>
         <br />
         <input
           type="text"
           placeholder="Provide input to method call"
-          className="input input-bordered w-full"
+          className="input-bordered input w-full"
           value={contractInput}
           onChange={(e) => {
             setContractInput(e.target.value)
           }}
         />
-        <div className="modal-action ">
+        <div className="modal-action">
           <button className="btn" onClick={() => setModalState(!openModal)}>
             Close
           </button>

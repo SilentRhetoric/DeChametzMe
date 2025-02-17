@@ -48,19 +48,19 @@ const Transact = ({ openModal, setModalState }: TransactInterface) => {
   return (
     <dialog id="transact_modal" className={`modal ${openModal ? 'modal-open' : ''} bg-slate-200`}>
       <form method="dialog" className="modal-box">
-        <h3 className="font-bold text-lg">Send payment transaction</h3>
+        <h3 className="text-lg font-bold">Send payment transaction</h3>
         <br />
         <input
           type="text"
           data-test-id="receiver-address"
           placeholder="Provide wallet address"
-          className="input input-bordered w-full"
+          className="input-bordered input w-full"
           value={receiverAddress}
           onChange={(e) => {
             setReceiverAddress(e.target.value)
           }}
         />
-        <div className="modal-action ">
+        <div className="modal-action">
           <button className="btn" onClick={() => setModalState(!openModal)}>
             Close
           </button>
