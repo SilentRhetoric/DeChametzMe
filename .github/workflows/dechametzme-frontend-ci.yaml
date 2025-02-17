@@ -8,7 +8,7 @@ jobs:
     runs-on: "ubuntu-latest"
     defaults:
       run:
-        working-directory: projects/DeChametzMe-frontend/
+        working-directory: projects/deChametzMe-frontend/
 
     steps:
       - name: Check out repository
@@ -27,7 +27,7 @@ jobs:
         with:
           node-version: 22
           cache: "pnpm"
-          cache-dependency-path: projects/DeChametzMe-frontend/pnpm-lock.yaml
+          cache-dependency-path: projects/deChametzMe-frontend/pnpm-lock.yaml
 
       - name: Install dependencies
         run: pnpm install
