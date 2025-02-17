@@ -8,8 +8,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=22.0",
-    "npm": ">=9.0"
+    "node": ">=22.0"
   },
   "devDependencies": {
     "@algorandfoundation/algokit-client-generator": "^4.0.7",
@@ -48,8 +47,8 @@
   },
   "scripts": {
     "generate:app-clients": "algokit project link --all",
-    "dev": "npm run generate:app-clients && vite",
-    "build": "npm run generate:app-clients && tsc && vite build",
+    "dev": "pnpm run generate:app-clients && vite",
+    "build": "pnpm run generate:app-clients && tsc && vite build",
     "test": "jest --coverage --passWithNoTests",
     "playwright:test": "playwright test",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",

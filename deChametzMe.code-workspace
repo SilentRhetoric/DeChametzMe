@@ -5,10 +5,10 @@
       "name": "ROOT"
     },
     {
-      "path": "./projects/deChametzMe-contracts"
+      "path": "./projects/DeChametzMe-contracts"
     },
     {
-      "path": "./projects/deChametzMe-frontend"
+      "path": "./projects/DeChametzMe-frontend"
     }
   ],
   "settings": {
@@ -21,7 +21,7 @@
   "extensions": {
     "recommendations": ["joshx.workspace-terminals"]
   },
-  
+
   "tasks": {
     "version": "2.0.0",
     "tasks": [
@@ -56,9 +56,9 @@
         "configurations": [
           {
             "name": "Deploy contracts",
-            "folder": "deChametzMe-contracts"
+            "folder": "DeChametzMe-contracts"
           },
-          { "name": "Run dApp", "folder": "deChametzMe-frontend" }
+          { "name": "Run dApp", "folder": "DeChametzMe-frontend" }
         ],
         "presentation": {
           "hidden": false,
@@ -67,4 +67,4 @@
       }
     ]
   }
-  }
+}

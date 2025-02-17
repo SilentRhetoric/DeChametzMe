@@ -15,24 +15,24 @@ permissions:
   packages: read
 
 jobs:
-  deChametzMe-contracts-validate:
-    name: Run deChametzMe-contracts validate
+  DeChametzMe-contracts-validate:
+    name: Run DeChametzMe-contracts validate
     secrets: inherit
     uses: ./.github/workflows/dechametzme-contracts-ci.yaml
 
-  deChametzMe-contracts-release:
-    name: Run deChametzMe-contracts release
+  DeChametzMe-contracts-release:
+    name: Run DeChametzMe-contracts release
     secrets: inherit
     uses: ./.github/workflows/dechametzme-contracts-cd.yaml
-    needs: deChametzMe-contracts-validate
+    needs: DeChametzMe-contracts-validate
 
-  deChametzMe-frontend-validate:
-    name: Run deChametzMe-frontend validate
+  DeChametzMe-frontend-validate:
+    name: Run DeChametzMe-frontend validate
     secrets: inherit
     uses: ./.github/workflows/dechametzme-frontend-ci.yaml
 
-  deChametzMe-frontend-release:
-    name: Run deChametzMe-frontend release
+  DeChametzMe-frontend-release:
+    name: Run DeChametzMe-frontend release
     secrets: inherit
     uses: ./.github/workflows/dechametzme-frontend-cd.yaml
-    needs: deChametzMe-frontend-validate
+    needs: DeChametzMe-frontend-validate

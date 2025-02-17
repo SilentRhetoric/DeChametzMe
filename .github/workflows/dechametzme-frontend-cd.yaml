@@ -1,4 +1,4 @@
-name: Release deChametzMe-frontend
+name: Release DeChametzMe-frontend
 
 on:
   workflow_call:
@@ -25,7 +25,7 @@ jobs:
         run: pipx install algokit
 
       - name: Bootstrap dependencies
-        run: algokit project bootstrap all --project-name 'deChametzMe-frontend'
+        run: algokit project bootstrap all --project-name 'DeChametzMe-frontend'
 
       - name: Publish to Netlify
         env:

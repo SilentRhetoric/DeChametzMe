@@ -7,5 +7,4 @@ cloud_provider: netlify
 contract_name: de_chametz
 deployment_language: python
 preset_name: production
-project_name: deChametzMe
-
+project_name: DeChametzMe

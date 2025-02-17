@@ -6,5 +6,4 @@ author_name: Brian Whippo
 contract_name: de_chametz
 deployment_language: python
 preset_name: production
-project_name: deChametzMe-contracts
-
+project_name: DeChametzMe-contracts

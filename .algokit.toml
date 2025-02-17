@@ -6,4 +6,4 @@ type = 'workspace'
 projects_root_path = 'projects'
 
 [project.run]
-build = ['deChametzMe-contracts', 'deChametzMe-frontend']
+build = ['DeChametzMe-contracts', 'DeChametzMe-frontend']

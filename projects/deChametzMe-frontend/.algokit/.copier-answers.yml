@@ -5,5 +5,4 @@ author_email: brian.whippo@algorand.foundation
 author_name: Brian Whippo
 cloud_provider: netlify
 preset_name: production
-project_name: deChametzMe-frontend
-
+project_name: DeChametzMe-frontend

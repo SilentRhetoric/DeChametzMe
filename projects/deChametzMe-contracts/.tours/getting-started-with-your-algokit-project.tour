@@ -4,7 +4,7 @@
   "steps": [
     {
       "file": "README.md",
-      "description": "Welcome to deChametz.me, an example AlgoKit template-based smart contract project. In this tour, will be guided through the main features and capabilities included in the template and see them in action for a small demo app.",
+      "description": "Welcome to DeChametz.me, an example AlgoKit template-based smart contract project. In this tour, will be guided through the main features and capabilities included in the template and see them in action for a small demo app.",
       "line": 1,
       "selection": {
         "start": {
