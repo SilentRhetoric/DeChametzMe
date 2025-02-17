@@ -51,4 +51,4 @@ jobs:
         run: algokit project run lint
 
       - name: Build
-        run: algokit project run build --project-name 'DeChametzMe-frontend'
+        run: algokit project run build
