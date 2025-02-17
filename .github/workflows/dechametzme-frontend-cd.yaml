@@ -35,7 +35,7 @@ jobs:
         run: pipx install algokit
 
       - name: Bootstrap dependencies
-        run: algokit project bootstrap all --project-name 'DeChametzMe-frontend'
+        run: algokit project bootstrap all --project-name 'deChametzMe-frontend'
 
       - name: Publish to Netlify
         env:

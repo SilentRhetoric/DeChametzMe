@@ -45,13 +45,13 @@ jobs:
         run: pipx install algokit
 
       - name: Install dependencies
-        run: algokit project bootstrap all --project-name 'DeChametzMe-frontend'
+        run: algokit project bootstrap all --project-name 'deChametzMe-frontend'
 
       - name: Run linters
-        run: algokit project run lint --project-name 'DeChametzMe-frontend'
+        run: algokit project run lint --project-name 'deChametzMe-frontend'
 
       - name: Run unit tests
-        run: algokit project run test --project-name 'DeChametzMe-frontend'
+        run: algokit project run test --project-name 'deChametzMe-frontend'
 
       - name: Build
-        run: algokit project run build --project-name 'DeChametzMe-frontend'
+        run: algokit project run build --project-name 'deChametzMe-frontend'
