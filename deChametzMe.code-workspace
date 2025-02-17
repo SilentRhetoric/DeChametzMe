@@ -5,10 +5,10 @@
       "name": "ROOT"
     },
     {
-      "path": "./projects/DeChametzMe-contracts"
+      "path": "./projects/deChametzMe-contracts"
     },
     {
-      "path": "./projects/DeChametzMe-frontend"
+      "path": "./projects/deChametzMe-frontend"
     }
   ],
   "settings": {
@@ -56,9 +56,9 @@
         "configurations": [
           {
             "name": "Deploy contracts",
-            "folder": "DeChametzMe-contracts"
+            "folder": "deChametzMe-contracts"
           },
-          { "name": "Run dApp", "folder": "DeChametzMe-frontend" }
+          { "name": "Run dApp", "folder": "deChametzMe-frontend" }
         ],
         "presentation": {
           "hidden": false,

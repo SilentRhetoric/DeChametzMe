@@ -7,9 +7,9 @@ name = 'DeChametzMe-frontend'
 artifacts = "src/contracts"
 
 [project.run]
-build = { commands = ['npm run build'], description = 'Build frontend' }
-test = { commands = ['npm run test'], description = 'Run frontend tests' }
-lint = { commands = ['npm run lint'], description = 'Lint frontend code' }
+build = { commands = ['pnpm run build'], description = 'Build frontend' }
+test = { commands = ['pnpm run test'], description = 'Run frontend tests' }
+lint = { commands = ['pnpm run lint'], description = 'Lint frontend code' }
 ci-deploy-netlify = { commands = [
     'npm install --global netlify-cli@latest',
     'netlify login',
