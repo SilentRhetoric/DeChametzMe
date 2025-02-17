@@ -6,6 +6,10 @@ on:
 jobs:
   validate:
     runs-on: "ubuntu-latest"
+    defaults:
+      run:
+        working-directory: ./DeChametzMe-frontend/
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -21,6 +25,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
+          cache-dependency-path: ./DeChametzMe-frontend/pnpm-lock.yaml
           node-version: 22
           cache: "pnpm"
 
