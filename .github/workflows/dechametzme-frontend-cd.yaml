@@ -13,7 +13,7 @@ jobs:
     environment: frontend-prod
 
     steps:
-      - name: Checkout
+      - name: Check out repository
         uses: actions/checkout@v4
 
       - uses: pnpm/action-setup@v4
