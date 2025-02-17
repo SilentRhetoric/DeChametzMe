@@ -168,3 +168,6 @@ cython_debug/
 # NPM
 node_modules
 
+
+# Local Netlify folder
+.netlify

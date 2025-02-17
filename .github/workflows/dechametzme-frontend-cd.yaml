@@ -7,12 +7,11 @@ permissions:
   packages: read
 
 jobs:
-  
   deploy:
     runs-on: ubuntu-latest
     name: Deploy to Netlify
     environment: frontend-prod
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -20,17 +19,16 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 22
 
       - name: Install algokit
         run: pipx install algokit
 
       - name: Bootstrap dependencies
         run: algokit project bootstrap all --project-name 'deChametzMe-frontend'
-    
+
       - name: Publish to Netlify
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         run: algokit project run ci-deploy-netlify
-    
