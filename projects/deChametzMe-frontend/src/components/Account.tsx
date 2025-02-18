@@ -16,7 +16,7 @@ const Account = () => {
       <a className="text-xl" target="_blank" href={`https://lora.algokit.io/${networkName}/account/${activeAddress}/`}>
         Address: {ellipseAddress(activeAddress)}
       </a>
-      <div className="text-xl">Network: {networkName}</div>
+      <div className="text-xl">Network: {networkName.toUpperCase()}</div>
     </div>
   )
 }

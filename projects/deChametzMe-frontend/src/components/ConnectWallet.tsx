@@ -13,20 +13,24 @@ const ConnectWallet = ({ openModal, closeModal }: ConnectWalletInterface) => {
 
   return (
     <dialog id="connect_wallet_modal" className={`modal ${openModal ? 'modal-open' : ''}`}>
-      <form method="dialog" className="modal-box">
-        <h3 className="text-2xl font-bold">Select wallet provider</h3>
-        <div className="m-2 grid pt-5">
-          {activeAddress && (
-            <>
-              <Account />
-              <div className="divider" />
-            </>
-          )}
+      <form method="dialog" className="modal-box flex flex-col gap-4 rounded-lg border-2 border-white">
+        <button
+          data-test-id="close-wallet-modal"
+          className="btn-ghost btn-sm btn-circle btn absolute right-2 top-2"
+          onClick={() => {
+            closeModal()
+          }}
+        >
+          ✕
+        </button>
+        <h3 className="text-2xl font-bold">{activeAddress ? 'Connected Wallet' : 'Connect Your Wallet'}</h3>
+        <div className="grid gap-2">
+          {activeAddress && <Account />}
           {!activeAddress &&
             wallets?.map((wallet) => (
               <button
                 data-test-id={`${wallet.id}-connect`}
-                className="border-1 btn m-2 border-teal-800"
+                className="btn-outline btn"
                 key={`provider-${wallet.id}`}
                 onClick={() => {
                   return wallet.connect()
@@ -43,18 +47,8 @@ const ConnectWallet = ({ openModal, closeModal }: ConnectWalletInterface) => {
               </button>
             ))}
         </div>
-
-        <div className="modal-action">
-          <button
-            data-test-id="close-wallet-modal"
-            className="btn"
-            onClick={() => {
-              closeModal()
-            }}
-          >
-            Close
-          </button>
-          {activeAddress && (
+        {activeAddress && (
+          <div className="modal-action">
             <button
               className="btn-warning btn"
               data-test-id="logout"
@@ -64,19 +58,17 @@ const ConnectWallet = ({ openModal, closeModal }: ConnectWalletInterface) => {
                   if (activeWallet) {
                     await activeWallet.disconnect()
                   } else {
-                    // Required for logout/cleanup of inactive providers
-                    // For instance, when you login to localnet wallet and switch network
-                    // to testnet/mainnet or vice verse.
+                    // Required for cleanup of inactive wallet providers
                     localStorage.removeItem('@txnlab/use-wallet:v4')
                     window.location.reload()
                   }
                 }
               }}
             >
-              Logout
+              Disconnect
             </button>
-          )}
-        </div>
+          </div>
+        )}
       </form>
     </dialog>
   )

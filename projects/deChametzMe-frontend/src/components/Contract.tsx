@@ -6,8 +6,13 @@ import {
   getAppIDFromViteEnvironment,
   getIndexerConfigFromViteEnvironment,
 } from '../utils/network/getAlgoClientConfigs'
+import AppCalls from './AppCalls'
 
-const ContractInfo = () => {
+interface ContractInfoProps {
+  address: string | null
+}
+
+const ContractInfo = ({ address }: ContractInfoProps) => {
   const algoConfig = getAlgodConfigFromViteEnvironment()
   const appId = getAppIDFromViteEnvironment()
 
@@ -25,6 +30,9 @@ const ContractInfo = () => {
 
   const [isJewish, setIsJewish] = useState<string | undefined>()
   const [tokenId, setTokenId] = useState<bigint | undefined>()
+  const [chametzSold, setChametzSold] = useState<string | null | undefined>()
+  const [activeDeal, setActiveDeal] = useState<boolean>(false)
+  const [appCallsModalOpen, setAppCallsModalOpen] = useState<boolean>(false)
 
   useEffect(() => {
     async function fetchData() {
@@ -33,6 +41,8 @@ const ContractInfo = () => {
         setIsJewish(isJewish)
         const tokenId = await appClient.state.global.tokenAssetId()
         setTokenId(tokenId)
+        const chametzDescription = address && (await appClient.state.local(address).chametzSold()).asString()
+        setChametzSold(chametzDescription)
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Error fetching data:', error)
@@ -41,13 +51,34 @@ const ContractInfo = () => {
     fetchData()
   }, [appClient])
 
+  useEffect(() => {
+    if (typeof chametzSold === 'string') {
+      setActiveDeal(true)
+    } else setActiveDeal(false)
+  }, [chametzSold])
+
+  const toggleAppCallsModal = () => {
+    setAppCallsModalOpen(!appCallsModalOpen)
+  }
+
   return (
-    <div>
-      <a className="text-xl" target="_blank" href={`https://lora.algokit.io/${networkName}/application/${appId}/`}>
-        View Application on Lora
+    <div className="flex flex-col items-center justify-center gap-1">
+      <h2 className="text-xl">Smart Contract Information</h2>
+      <p>Religion: {isJewish === 'no' ? 'Non-Jewish' : null}</p>
+      <p>4CHAMETZ Token ID: {tokenId?.toString()}</p>
+      <a target="_blank" href={`https://lora.algokit.io/${networkName}/application/${appId}/`}>
+        <button className="btn-ghost btn grid gap-2">View application on Lora</button>
       </a>
-      <p className="">Smart Contract Religion: {isJewish === 'no' ? 'Non-Jewish' : null}</p>
-      <p className="">Token ID: {tokenId?.toString()}</p>
+      {address && (
+        <div className="grid gap-1">
+          <p>Active Deal: {activeDeal ? 'Yes' : 'No'}</p>
+          <p>Description of chametz you sold: {chametzSold}</p>
+          <button className="btn-primary btn" onClick={toggleAppCallsModal}>
+            {`${activeDeal ? 'Repurchase' : 'Sell'} Chametz`}
+          </button>
+        </div>
+      )}
+      <AppCalls modalOpen={appCallsModalOpen} closeModal={toggleAppCallsModal} activeDeal={activeDeal} />
     </div>
   )
 }
