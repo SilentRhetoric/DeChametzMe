@@ -1,4 +1,5 @@
 import { AlgorandClient } from '@algorandfoundation/algokit-utils'
+import { ABIStringType, isValidAddress } from 'algosdk'
 import { useEffect, useMemo, useState } from 'react'
 import { DeChametzClient } from '../contracts/DeChametz'
 import {
@@ -30,32 +31,38 @@ const ContractInfo = ({ address }: ContractInfoProps) => {
 
   const [isJewish, setIsJewish] = useState<string | undefined>()
   const [tokenId, setTokenId] = useState<bigint | undefined>()
-  const [chametzSold, setChametzSold] = useState<string | null | undefined>()
+  const [chametzSold, setChametzSold] = useState<string | undefined>()
   const [activeDeal, setActiveDeal] = useState<boolean>(false)
   const [appCallsModalOpen, setAppCallsModalOpen] = useState<boolean>(false)
+  const [lastTxnID, setLastTxnID] = useState<string | undefined>(undefined)
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const isJewish = await appClient.state.global.isJewish()
-        setIsJewish(isJewish)
-        const tokenId = await appClient.state.global.tokenAssetId()
-        setTokenId(tokenId)
-        const chametzDescription = address && (await appClient.state.local(address).chametzSold()).asString()
-        setChametzSold(chametzDescription)
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error('Error fetching data:', error)
+  async function fetchData() {
+    try {
+      const isJewish = await appClient.state.global.isJewish()
+      setIsJewish(isJewish)
+      const tokenId = await appClient.state.global.tokenAssetId()
+      setTokenId(tokenId)
+      if (address && isValidAddress(address)) {
+        const chametzSoldBytes = await (await appClient.state.local(address).chametzSold()).asByteArray()
+        if (chametzSoldBytes !== undefined) {
+          const chametzDescr = new ABIStringType().decode(chametzSoldBytes)
+          setChametzSold(chametzDescr)
+          if (typeof chametzDescr === 'string' && chametzDescr.length > 0) {
+            setActiveDeal(true)
+          } else setActiveDeal(false)
+        }
       }
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Error fetching data:', error)
+      setChametzSold(undefined)
+      setActiveDeal(false)
     }
-    fetchData()
-  }, [appClient])
+  }
 
   useEffect(() => {
-    if (typeof chametzSold === 'string') {
-      setActiveDeal(true)
-    } else setActiveDeal(false)
-  }, [chametzSold])
+    fetchData()
+  }, [lastTxnID])
 
   const toggleAppCallsModal = () => {
     setAppCallsModalOpen(!appCallsModalOpen)
@@ -71,9 +78,14 @@ const ContractInfo = ({ address }: ContractInfoProps) => {
           <p>Active Deal: {activeDeal ? 'Yes' : 'No'}</p>
           {activeDeal && <p>Chametz you sold to the smart contract:</p>}
           {activeDeal && <p>{chametzSold}</p>}
+          {lastTxnID && (
+            <a target="_blank" href={`https://lora.algokit.io/${networkName}/transaction/${lastTxnID}/`}>
+              <button className="btn-accent btn">View transcation on Lora ↗</button>
+            </a>
+          )}
         </div>
       )}
-      <div className="grid gap-2 rounded-lg border-2 border-white p-4">
+      <div className="grid gap-2 rounded-lg p-4">
         <h2 className="text-xl">Smart Contract Details</h2>
         <p>Religion: {isJewish === 'no' ? 'Non-Jewish' : null}</p>
         <p>4CHAMETZ Token ID: {tokenId?.toString()}</p>
@@ -81,7 +93,13 @@ const ContractInfo = ({ address }: ContractInfoProps) => {
           <button className="btn-accent btn">View application on Lora ↗</button>
         </a>
       </div>
-      <AppCalls modalOpen={appCallsModalOpen} closeModal={toggleAppCallsModal} activeDeal={activeDeal} />
+      <AppCalls
+        modalOpen={appCallsModalOpen}
+        setAppCallsModalOpen={setAppCallsModalOpen}
+        activeDeal={activeDeal}
+        setLastTxnID={setLastTxnID}
+        fetchData={fetchData}
+      />
     </div>
   )
 }

@@ -2,23 +2,22 @@ import { useWallet, Wallet, WalletId } from '@txnlab/use-wallet-react'
 import Account from './Account'
 
 interface ConnectWalletInterface {
-  openModal: boolean
-  closeModal: () => void
+  modalOpen: boolean
+  setWalletModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ConnectWallet = ({ openModal, closeModal }: ConnectWalletInterface) => {
+const ConnectWallet = ({ modalOpen, setWalletModalOpen }: ConnectWalletInterface) => {
   const { wallets, activeAddress } = useWallet()
 
   const isKmd = (wallet: Wallet) => wallet.id === WalletId.KMD
 
   return (
-    <dialog id="connect_wallet_modal" className={`modal ${openModal ? 'modal-open' : ''}`}>
+    <dialog id="connect_wallet_modal" className={`modal ${modalOpen ? 'modal-open' : ''}`}>
       <form method="dialog" className="modal-box flex flex-col gap-4 rounded-lg border-2 border-white">
         <button
-          data-test-id="close-wallet-modal"
           className="btn-ghost btn-sm btn-circle btn absolute right-2 top-2"
           onClick={() => {
-            closeModal()
+            setWalletModalOpen(false)
           }}
         >
           ✕
@@ -29,11 +28,11 @@ const ConnectWallet = ({ openModal, closeModal }: ConnectWalletInterface) => {
           {!activeAddress &&
             wallets?.map((wallet) => (
               <button
-                data-test-id={`${wallet.id}-connect`}
                 className="btn-outline btn"
                 key={`provider-${wallet.id}`}
                 onClick={() => {
-                  return wallet.connect()
+                  wallet.connect()
+                  setWalletModalOpen(false)
                 }}
               >
                 {!isKmd(wallet) && (
@@ -51,7 +50,6 @@ const ConnectWallet = ({ openModal, closeModal }: ConnectWalletInterface) => {
           <div className="modal-action">
             <button
               className="btn-warning btn"
-              data-test-id="logout"
               onClick={async () => {
                 if (wallets) {
                   const activeWallet = wallets.find((w) => w.isActive)
@@ -63,6 +61,7 @@ const ConnectWallet = ({ openModal, closeModal }: ConnectWalletInterface) => {
                     window.location.reload()
                   }
                 }
+                setWalletModalOpen(false)
               }}
             >
               Disconnect

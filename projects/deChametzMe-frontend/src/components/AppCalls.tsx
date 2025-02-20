@@ -7,11 +7,13 @@ import { getAlgodConfigFromViteEnvironment, getIndexerConfigFromViteEnvironment 
 
 interface AppCallsProps {
   modalOpen: boolean
-  closeModal: () => void
+  setAppCallsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
   activeDeal: boolean
+  setLastTxnID: React.Dispatch<React.SetStateAction<string | undefined>>
+  fetchData: () => Promise<void>
 }
 
-const AppCalls = ({ modalOpen, closeModal, activeDeal }: AppCallsProps) => {
+const AppCalls = ({ modalOpen, setAppCallsModalOpen, activeDeal, setLastTxnID }: AppCallsProps) => {
   const [loading, setLoading] = useState<boolean>(false)
   const [contractInput, setContractInput] = useState<string>('')
   const { enqueueSnackbar } = useSnackbar()
@@ -71,9 +73,11 @@ const AppCalls = ({ modalOpen, closeModal, activeDeal }: AppCallsProps) => {
     if (!response) {
       return
     }
+    console.debug('response', response)
     enqueueSnackbar(`Successfully sold the ${response.returns[0]}`, { variant: 'success' })
     setLoading(false)
-    closeModal()
+    setAppCallsModalOpen(false)
+    setLastTxnID(response.txIds[1])
   }
 
   const repurchaseChametz = async () => {
@@ -96,19 +100,20 @@ const AppCalls = ({ modalOpen, closeModal, activeDeal }: AppCallsProps) => {
     if (!response) {
       return
     }
+    console.debug('response', response)
     enqueueSnackbar(`Successfully repurchased the ${response.returns![0].returnValue}`, { variant: 'success' })
     setLoading(false)
-    closeModal()
+    setAppCallsModalOpen(false)
+    setLastTxnID(response.txIds[0])
   }
 
   return (
     <dialog id="appcalls_modal" className={`modal ${modalOpen ? 'modal-open' : ''}`}>
       <form method="dialog" className="modal-box">
         <button
-          data-test-id="close-wallet-modal"
           className="btn-ghost btn-sm btn-circle btn absolute right-2 top-2"
           onClick={() => {
-            closeModal()
+            setAppCallsModalOpen(false)
           }}
         >
           ✕

@@ -44,9 +44,7 @@ def test_sell_chametz(
     token_id = de_chametz_app_client.state.global_state.token_asset_id
 
     result: SendAtomicTransactionComposerResults = (
-        de_chametz_app_client
-        # .algorand.new_group().add_asset_opt_in(params=AssetOptInParams(asset_id=token_id, sender=caller.address))
-        .new_group()
+        de_chametz_app_client.new_group()
         .add_transaction(
             de_chametz_app_client.app_client.algorand.create_transaction.asset_opt_in(
                 AssetOptInParams(
