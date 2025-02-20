@@ -74,7 +74,7 @@ const ContractInfo = ({ address }: ContractInfoProps) => {
         </div>
       )}
       <div className="grid gap-2 rounded-lg border-2 border-white p-4">
-        <h2 className="text-xl">Smart Contract Information</h2>
+        <h2 className="text-xl">Smart Contract Details</h2>
         <p>Religion: {isJewish === 'no' ? 'Non-Jewish' : null}</p>
         <p>4CHAMETZ Token ID: {tokenId?.toString()}</p>
         <a target="_blank" href={`https://lora.algokit.io/${networkName}/application/${appId}/`}>
