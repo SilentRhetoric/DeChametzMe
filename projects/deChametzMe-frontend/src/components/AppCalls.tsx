@@ -73,6 +73,7 @@ const AppCalls = ({ modalOpen, setAppCallsModalOpen, activeDeal, setLastTxnID }:
     if (!response) {
       return
     }
+    // eslint-disable-next-line no-console
     console.debug('response', response)
     enqueueSnackbar(`Successfully sold the ${response.returns[0]}`, { variant: 'success' })
     setLoading(false)
@@ -100,6 +101,7 @@ const AppCalls = ({ modalOpen, setAppCallsModalOpen, activeDeal, setLastTxnID }:
     if (!response) {
       return
     }
+    // eslint-disable-next-line no-console
     console.debug('response', response)
     enqueueSnackbar(`Successfully repurchased the ${response.returns![0].returnValue}`, { variant: 'success' })
     setLoading(false)
