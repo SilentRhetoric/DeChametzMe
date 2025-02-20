@@ -61,7 +61,7 @@ const AppCalls = ({ modalOpen, closeModal, activeDeal }: AppCallsProps) => {
       // .addAssetOptIn({ assetId: 733984119n, sender: activeAddress! })
       .newGroup()
       .addTransaction(assetOptIn)
-      .optIn.sellChametz({ args: { chametz: contractInput }, sender: activeAddress!, staticFee: (200000).microAlgos() })
+      .optIn.sellChametz({ args: { chametz: contractInput }, sender: activeAddress!, staticFee: (2000).microAlgos() })
       .send()
       .catch((e: Error) => {
         enqueueSnackbar(`Error calling the contract: ${e.message}`, { variant: 'error' })
@@ -71,7 +71,7 @@ const AppCalls = ({ modalOpen, closeModal, activeDeal }: AppCallsProps) => {
     if (!response) {
       return
     }
-    enqueueSnackbar(`Response from the contract: ${response.returns[0]}`, { variant: 'success' })
+    enqueueSnackbar(`Successfully sold the ${response.returns[0]}`, { variant: 'success' })
     setLoading(false)
     closeModal()
   }
@@ -79,10 +79,9 @@ const AppCalls = ({ modalOpen, closeModal, activeDeal }: AppCallsProps) => {
   const repurchaseChametz = async () => {
     setLoading(true)
     const appClient = new DeChametzClient({ algorand, appId: 733981798n })
-    const response = await appClient
-      .newGroup()
-      .closeOut.repurchaseChametz({ args: [], sender: activeAddress! })
-      .composer()
+    const response = await (
+      await appClient.newGroup().closeOut.repurchaseChametz({ args: [], sender: activeAddress!, staticFee: (2000).microAlgos() }).composer()
+    )
       .addAssetOptOut({
         assetId: 733984119n,
         sender: activeAddress!,
@@ -97,7 +96,7 @@ const AppCalls = ({ modalOpen, closeModal, activeDeal }: AppCallsProps) => {
     if (!response) {
       return
     }
-    enqueueSnackbar(`Response from the contract: ${response.returns![0]}`, { variant: 'success' })
+    enqueueSnackbar(`Successfully repurchased the ${response.returns![0].returnValue}`, { variant: 'success' })
     setLoading(false)
     closeModal()
   }
@@ -115,7 +114,7 @@ const AppCalls = ({ modalOpen, closeModal, activeDeal }: AppCallsProps) => {
           ✕
         </button>
         {activeDeal ? (
-          <div>
+          <div className="grid gap-4">
             <h3 className="text-xl">Repurchase the chametz from the smart contract!</h3>
             <div className="modal-action">
               <button className="btn-primary btn" onClick={repurchaseChametz}>
@@ -124,7 +123,7 @@ const AppCalls = ({ modalOpen, closeModal, activeDeal }: AppCallsProps) => {
             </div>
           </div>
         ) : (
-          <div>
+          <div className="grid gap-4">
             <h3 className="text-xl">Sell your chametz to the smart contract!</h3>
             <input
               type="text"

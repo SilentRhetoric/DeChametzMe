@@ -43,8 +43,8 @@ importers:
         version: 2.8.1
     devDependencies:
       '@algorandfoundation/algokit-client-generator':
-        specifier: ^4.0.7
-        version: 4.0.7(@algorandfoundation/algokit-utils@8.1.0(algosdk@3.2.0))(algosdk@3.2.0)
+        specifier: ^4.0.8
+        version: 4.0.8(@algorandfoundation/algokit-utils@8.1.0(algosdk@3.2.0))(algosdk@3.2.0)
       '@types/node':
         specifier: ^22.13.4
         version: 22.13.4
@@ -99,8 +99,8 @@ importers:
 
 packages:
 
-  '@algorandfoundation/algokit-client-generator@4.0.7':
-    resolution: {integrity: sha512-Q0H0da1Y4HgMuPQRfyjel0kuasNc9Xq+glJPuQMmH9Hd4+Y36yCIo6vwO8vjOVPo5ucPxc8OWYlgWxWJKOGKDQ==}
+  '@algorandfoundation/algokit-client-generator@4.0.8':
+    resolution: {integrity: sha512-jez08mzZeFzzFAymVjFZrVXPf3BFFzU2EyUp5csiYsHdc/040pRSxRb91qlyaVmTGT9mO4JbK0ztNIiwC1xfCw==}
     engines: {node: '>=20.0'}
     hasBin: true
     peerDependencies:
@@ -2264,7 +2264,7 @@ packages:
 
 snapshots:
 
-  '@algorandfoundation/algokit-client-generator@4.0.7(@algorandfoundation/algokit-utils@8.1.0(algosdk@3.2.0))(algosdk@3.2.0)':
+  '@algorandfoundation/algokit-client-generator@4.0.8(@algorandfoundation/algokit-utils@8.1.0(algosdk@3.2.0))(algosdk@3.2.0)':
     dependencies:
       '@algorandfoundation/algokit-utils': 8.1.0(algosdk@3.2.0)
       algosdk: 3.2.0

@@ -62,7 +62,7 @@ const ContractInfo = ({ address }: ContractInfoProps) => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center gap-1">
+    <div className="flex flex-col items-center justify-center gap-2">
       <h2 className="text-xl">Smart Contract Information</h2>
       <p>Religion: {isJewish === 'no' ? 'Non-Jewish' : null}</p>
       <p>4CHAMETZ Token ID: {tokenId?.toString()}</p>
@@ -70,9 +70,9 @@ const ContractInfo = ({ address }: ContractInfoProps) => {
         <button className="btn-ghost btn grid gap-2">View application on Lora</button>
       </a>
       {address && (
-        <div className="grid gap-1">
+        <div className="grid gap-2">
           <p>Active Deal: {activeDeal ? 'Yes' : 'No'}</p>
-          <p>Description of chametz you sold: {chametzSold}</p>
+          {activeDeal && <p>Description of chametz you sold: {chametzSold}</p>}
           <button className="btn-primary btn" onClick={toggleAppCallsModal}>
             {`${activeDeal ? 'Repurchase' : 'Sell'} Chametz`}
           </button>
