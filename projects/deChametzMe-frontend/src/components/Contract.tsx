@@ -62,22 +62,25 @@ const ContractInfo = ({ address }: ContractInfoProps) => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center gap-2">
-      <h2 className="text-xl">Smart Contract Information</h2>
-      <p>Religion: {isJewish === 'no' ? 'Non-Jewish' : null}</p>
-      <p>4CHAMETZ Token ID: {tokenId?.toString()}</p>
-      <a target="_blank" href={`https://lora.algokit.io/${networkName}/application/${appId}/`}>
-        <button className="btn-ghost btn grid gap-2">View application on Lora</button>
-      </a>
+    <div className="flex flex-col items-center justify-center gap-4">
       {address && (
         <div className="grid gap-2">
-          <p>Active Deal: {activeDeal ? 'Yes' : 'No'}</p>
-          {activeDeal && <p>Description of chametz you sold: {chametzSold}</p>}
-          <button className="btn-primary btn" onClick={toggleAppCallsModal}>
+          <button className="btn-primary btn m-auto" onClick={toggleAppCallsModal}>
             {`${activeDeal ? 'Repurchase' : 'Sell'} Chametz`}
           </button>
+          <p>Active Deal: {activeDeal ? 'Yes' : 'No'}</p>
+          {activeDeal && <p>Chametz you sold to the smart contract:</p>}
+          {activeDeal && <p>{chametzSold}</p>}
         </div>
       )}
+      <div className="grid gap-2 rounded-lg border-2 border-white p-4">
+        <h2 className="text-xl">Smart Contract Information</h2>
+        <p>Religion: {isJewish === 'no' ? 'Non-Jewish' : null}</p>
+        <p>4CHAMETZ Token ID: {tokenId?.toString()}</p>
+        <a target="_blank" href={`https://lora.algokit.io/${networkName}/application/${appId}/`}>
+          <button className="btn-accent btn">View application on Lora ↗</button>
+        </a>
+      </div>
       <AppCalls modalOpen={appCallsModalOpen} closeModal={toggleAppCallsModal} activeDeal={activeDeal} />
     </div>
   )

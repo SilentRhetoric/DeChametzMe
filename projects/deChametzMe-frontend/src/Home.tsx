@@ -23,11 +23,13 @@ const Home: React.FC<HomeProps> = () => {
           </h1>
           <p className="">De-chametz yourself! Sell your chametz to a smart contract before Pesach and repurchase it after.</p>
           <ContractInfo address={activeAddress} />
-          <div className="grid gap-4">
-            <button data-test-id="connect-wallet" className="btn-primary btn" onClick={toggleWalletModal}>
-              Wallet Connection
-            </button>
-          </div>
+          <button
+            data-test-id="connect-wallet"
+            className={`${activeAddress ? 'btn-secondary' : 'btn-primary'} btn m-auto`}
+            onClick={toggleWalletModal}
+          >
+            {activeAddress ? 'Wallet Connection' : 'Connect Wallet'}
+          </button>
           <ConnectWallet openModal={walletModalOpen} closeModal={toggleWalletModal} />
         </div>
       </div>
