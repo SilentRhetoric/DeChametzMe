@@ -1,6 +1,26 @@
 # DeChametzMe
 
-This starter full stack project has been generated using AlgoKit. See below for default getting started instructions.
+DeChametzMe is an example application created using the AlgoKit full-stack project template that includes a smart contract & deploy scripts in Python and a React+Vite front end in TypeScript.
+
+## Decentralized Sale and Repurchase of Chametz
+
+### About Chametz and Passover
+
+Chametz is the Hebrew term for leavened foods that are prohibited during the Jewish holiday of Passover. One way to comply with the requirement to remove chametz to observe Passover is a practice _Mechirah_ of selling one's chametz to a non-Jewish person for the duration of Passover and repurchasing it after the holiday.
+
+This is more than just a symbolic gesture; it is a legally binding sale. To help facilitate this, some Jewish communities sign a contract with a rabbi as agent to avoid everyone needing to find a non-Jewish buyer for their chametz.
+
+What if there was a decentralized way to sell one's chametz to a non-Jew?
+
+### Decentralized Mechirah
+
+DeChametzMe enables Jewish people to sell their chametz to a smart contract application on the Algorand blockchain rather than needing to find a human buyer or retain a Rabbi as their agent. Instead, the smart contract serves as a willing buyer for anyone to transact with permissionlessly.
+
+The web app enables users to connect an Algorand wallet, describe the chametz they want to sell, and transfer it to the smart contract in exchange for one unit of a token "4CHAMETZ" that represents a transfer of value similar to the tradition of selling for one dollar. After Passover, the token can be used to repurchase the chametz.
+
+During passover, the chametz belongs to the smart contract, which is defined as being non-Jewish to satisfy that requirement. This fact can be seen in the global state of the application on chain.
+
+With the capabilities of blockchain, anyone can "de-chametz" themselves to prepare for Passover!
 
 ## Setup
 
