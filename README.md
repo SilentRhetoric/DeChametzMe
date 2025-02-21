@@ -24,6 +24,14 @@ Once sold, the chametz belongs to the smart contract, which is defined as being 
 
 With the capabilities of blockchain, anyone can "de-chametz" themselves to prepare for Passover!
 
+### Process Diagram
+
+The process of interacting with the smart contract is extremely simple as anyone can call the smart contract to sell chametz and then later repurchase it.
+
+<img src="./bpmn-diagram.svg">
+
+Note: The contract does not enforce any timing related to Passover as the exact timing of the holiday differs around the world while the smart contract exists in one state for the entire Algorand blockchain network globally.
+
 ### Deployment
 
 The DeChametzMe smart contract is deployed to TestNet as application [733981798](https://lora.algokit.io/testnet/application/733981798/).
