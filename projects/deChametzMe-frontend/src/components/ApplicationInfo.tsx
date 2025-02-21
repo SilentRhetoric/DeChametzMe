@@ -80,7 +80,7 @@ const ContractInfo = ({ address }: ContractInfoProps) => {
           {activeDeal && <p>{chametzSold}</p>}
           {lastTxnID && (
             <a target="_blank" href={`https://lora.algokit.io/${networkName}/transaction/${lastTxnID}/`}>
-              <button className="btn-accent btn">View transcation on Lora ↗</button>
+              <button className="btn-accent btn">View transaction on Lora ↗</button>
             </a>
           )}
         </div>
