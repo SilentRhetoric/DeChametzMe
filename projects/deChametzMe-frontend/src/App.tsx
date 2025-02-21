@@ -18,8 +18,8 @@ if (import.meta.env.VITE_ALGOD_NETWORK === 'localnet') {
   ]
 } else {
   supportedWallets = [
-    { id: WalletId.DEFLY },
     { id: WalletId.PERA },
+    { id: WalletId.DEFLY },
     { id: WalletId.LUTE, options: { siteName: 'DeChametz Me' } },
     { id: WalletId.EXODUS },
     // If you are interested in WalletConnect v2 provider

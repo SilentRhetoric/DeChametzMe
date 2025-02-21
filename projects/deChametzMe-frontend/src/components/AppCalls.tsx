@@ -27,44 +27,17 @@ const AppCalls = ({ modalOpen, setAppCallsModalOpen, activeDeal, setLastTxnID }:
     indexerConfig,
   })
   algorand.setDefaultSigner(transactionSigner)
+  algorand.setDefaultValidityWindow(100)
 
   const sellChametz = async () => {
     setLoading(true)
-
-    // // Please note, in typical production scenarios,
-    // // you wouldn't want to use deploy directly from your frontend.
-    // // Instead, you would deploy your contract on your backend and reference it by id.
-    // // Given the simplicity of the starter contract, we are deploying it on the frontend
-    // // for demonstration purposes.
-    // const factory = new DeChametzFactory({
-    //   defaultSender: activeAddress,
-    //   algorand,
-    // })
-    // const deployResult = await factory
-    //   .deploy({
-    //     onSchemaBreak: OnSchemaBreak.AppendApp,
-    //     onUpdate: OnUpdate.AppendApp,
-    //   })
-    //   .catch((e: Error) => {
-    //     enqueueSnackbar(`Error deploying the contract: ${e.message}`, { variant: 'error' })
-    //     setLoading(false)
-    //     return undefined
-    //   })
-    // if (!deployResult) {
-    //   return
-    // }
-    // const { appClient } = deployResult
-
     const appClient = new DeChametzClient({ algorand, appId: 733981798n })
     const assetOptIn = await algorand.createTransaction.assetOptIn({ assetId: 733984119n, sender: activeAddress! })
     const response = await appClient
-      // .algorand // This doesn't work because you can't get back to the typed app opt in
-      // .newGroup()
-      // .addAssetOptIn({ assetId: 733984119n, sender: activeAddress! })
       .newGroup()
       .addTransaction(assetOptIn)
       .optIn.sellChametz({ args: { chametz: contractInput }, sender: activeAddress!, staticFee: (2000).microAlgos() })
-      .send()
+      .send({ maxRoundsToWaitForConfirmation: 100 })
       .catch((e: Error) => {
         enqueueSnackbar(`Error calling the contract: ${e.message}`, { variant: 'error' })
         setLoading(false)
@@ -92,7 +65,7 @@ const AppCalls = ({ modalOpen, setAppCallsModalOpen, activeDeal, setLastTxnID }:
         sender: activeAddress!,
         creator: '3226CCPA67CBWB3ALPKTQKULVO6V2AHUDMGNFDQBOQPVGMYVOE2D6SKKNA', // The app created the ASA
       })
-      .send()
+      .send({ maxRoundsToWaitForConfirmation: 100 })
       .catch((e: Error) => {
         enqueueSnackbar(`Error calling the contract: ${e.message}`, { variant: 'error' })
         setLoading(false)

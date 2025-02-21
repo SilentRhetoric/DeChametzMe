@@ -1,0 +1,113 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Project Overview",
+  "steps": [
+    {
+      "file": "README.md",
+      "description": "Learn about the DeChametzMe demo app and how the project is set up in this README in the ROOT directory. ",
+      "line": 1
+    },
+    {
+      "file": "DeChametzMe.code-workspace",
+      "description": "The project is set up as a monorepo consisting of a project for the smart contracts and another for the front end. This file defines a VSCode workspace that brings everything together to make it easier to develop on both projects.",
+      "line": 1
+    },
+    {
+      "directory": "projects/deChametzMe-contracts",
+      "description": "This folder contains the \"back end\" project that is used to author the smart contract, deploy it to the network, and run tests against it."
+    },
+    {
+      "file": "projects/deChametzMe-contracts/smart_contracts/de_chametz/contract.py",
+      "description": "The smart contract at the heart of the app is written here in Algorand Python.",
+      "line": 1
+    },
+    {
+      "directory": "projects/deChametzMe-contracts/smart_contracts/artifacts/de_chametz",
+      "description": "Once the smart contract is compiled, a set of artifacts are produced that live here. This includes a typed Python client for interacting with the contract, the compiled Teal approval and clear state programs, source maps between the Algorand Python source code and compiled Teal, and the arc56.json application specification file."
+    },
+    {
+      "file": "projects/deChametzMe-contracts/smart_contracts/__main__.py",
+      "description": "This file contains the main Python script logic that is used to build and deploy the contract.",
+      "line": 1
+    },
+    {
+      "directory": "projects/deChametzMe-contracts/tests",
+      "description": "This folder contains tests for the smart contract, which are always important. In this project, both unit tests and integration tests have been created."
+    },
+    {
+      "file": "projects/deChametzMe-contracts/tests/conftest.py",
+      "description": "The conftest file sets up the session and fixtures for testing, which is managed using Pytest.",
+      "line": 1
+    },
+    {
+      "file": "projects/deChametzMe-contracts/tests/de_chametz_unit_test.py",
+      "description": "This file contains the unit tests that are run using the Algorand Python testing framwork. This enables offline testing of contract logic using an emulated Algorand Virtual Machine without needing to be connected to a network.",
+      "line": 1
+    },
+    {
+      "file": "projects/deChametzMe-contracts/tests/de_chametz_client_test.py",
+      "description": "The tests in this file are full integration tests against LocalNet in which transactions are sent and evaluated by the network. These tests can be adapted to run against a public network like TestNet.",
+      "line": 1
+    },
+    {
+      "file": "projects/deChametzMe-contracts/README.md",
+      "description": "More details about installing and running this smart contract project can be found in the README here.",
+      "line": 1
+    },
+    {
+      "directory": "projects/deChametzMe-frontend",
+      "description": "Next we have the front end project, which is in this folder. It is a React single page application (SPA) that uses Vite and TypeScript."
+    },
+    {
+      "file": "projects/deChametzMe-frontend/src/App.tsx",
+      "description": "The app logic starts here, where the UseWallet library is initialized to provide Algorand wallet connectivity.",
+      "line": 1
+    },
+    {
+      "file": "projects/deChametzMe-frontend/src/Home.tsx",
+      "description": "The visual layout of the app begins here.",
+      "line": 1
+    },
+    {
+      "file": "projects/deChametzMe-frontend/src/components/ConnectWallet.tsx",
+      "description": "This file handles connecting to an Algorand wallet.",
+      "line": 1
+    },
+    {
+      "file": "projects/deChametzMe-frontend/src/components/Account.tsx",
+      "description": "This file displays information about the connected account.",
+      "line": 1
+    },
+    {
+      "file": "projects/deChametzMe-frontend/src/components/ApplicationInfo.tsx",
+      "description": "This file queries the chain to get and display information about the smart contract.",
+      "line": 1
+    },
+    {
+      "file": "projects/deChametzMe-frontend/src/components/AppCalls.tsx",
+      "description": "This file handles building and sending the transactions to interact with the contract.",
+      "line": 1
+    },
+    {
+      "file": "projects/deChametzMe-frontend/src/contracts/DeChametz.ts",
+      "description": "Finally, this is the generated TypeScript client that is used to interact with the smart contract on the front end.",
+      "line": 1
+    },
+    {
+      "file": "projects/deChametzMe-frontend/src/contracts/README.md",
+      "description": "This extra README explains how to work with generated clients in an AlgoKit project.",
+      "line": 1
+    },
+    {
+      "file": "projects/deChametzMe-frontend/README.md",
+      "description": "Finally, this README for the front end project contains detailed instructions for development.",
+      "line": 1
+    },
+    {
+      "file": "README.md",
+      "description": "Thanks for taking this CodeTour!",
+      "line": 1
+    }
+  ],
+  "isPrimary": true
+}
