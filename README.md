@@ -34,7 +34,7 @@ Note: The contract does not enforce any timing related to Passover as the exact 
 
 ### Deployment
 
-The DeChametzMe smart contract is deployed to TestNet as application [733981798](https://lora.algokit.io/testnet/application/733981798/).
+The DeChametzMe smart contract is deployed to MainNet as application [2920830754](https://lora.algokit.io/testnet/application/2920830754/) and TestNet as application [733981798](https://lora.algokit.io/testnet/application/733981798/).
 
 ## Project Setup
 
