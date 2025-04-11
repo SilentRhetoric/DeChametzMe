@@ -31,8 +31,8 @@ const AppCalls = ({ modalOpen, setAppCallsModalOpen, activeDeal, setLastTxnID }:
 
   const sellChametz = async () => {
     setLoading(true)
-    const appClient = new DeChametzClient({ algorand, appId: 733981798n })
-    const assetOptIn = await algorand.createTransaction.assetOptIn({ assetId: 733984119n, sender: activeAddress! })
+    const appClient = new DeChametzClient({ algorand, appId: 2920830754n })
+    const assetOptIn = await algorand.createTransaction.assetOptIn({ assetId: 2920837237n, sender: activeAddress! })
     const response = await appClient
       .newGroup()
       .addTransaction(assetOptIn)
@@ -56,14 +56,14 @@ const AppCalls = ({ modalOpen, setAppCallsModalOpen, activeDeal, setLastTxnID }:
 
   const repurchaseChametz = async () => {
     setLoading(true)
-    const appClient = new DeChametzClient({ algorand, appId: 733981798n })
+    const appClient = new DeChametzClient({ algorand, appId: 2920830754n })
     const response = await (
       await appClient.newGroup().closeOut.repurchaseChametz({ args: [], sender: activeAddress!, staticFee: (2000).microAlgos() }).composer()
     )
       .addAssetOptOut({
-        assetId: 733984119n,
+        assetId: 2920837237n,
         sender: activeAddress!,
-        creator: '3226CCPA67CBWB3ALPKTQKULVO6V2AHUDMGNFDQBOQPVGMYVOE2D6SKKNA', // The app created the ASA
+        creator: 'BMTX6P3MW6IMD3SJMKPOJYQJFMGA7ZXV2N7SNV4ZGTV7V2VR4QJ7P7KBVQ', // The app created the ASA
       })
       .send({ maxRoundsToWaitForConfirmation: 100 })
       .catch((e: Error) => {
