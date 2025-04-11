@@ -4,7 +4,7 @@ DeChametzMe is an example application created using the AlgoKit full-stack proje
 
 ## Decentralized Sale and Repurchase of Chametz
 
-DeChametzMe is a way to sell your chametz on blockchain without another person.
+DeChametzMe is a way to sell your chametz without another person by selling it to a smart contract on a public blockchain, Algorand MainNet.
 
 ### Chametz and Passover
 
